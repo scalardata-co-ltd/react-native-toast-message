@@ -30,10 +30,5 @@ jobs:
       - name: Install dependencies
         run: yarn --prefer-offline
 
-      - name: Setup React Native environment
-        run: |
-          yarn add react@17.0.2
-          yarn add react-native@0.64.2
-
       - name: Run code quality checks
         run: yarn quality

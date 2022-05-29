@@ -1,7 +1,8 @@
 /* eslint-env jest */
 
-import { render } from '@testing-library/react-native';
 import React from 'react';
+
+import { render } from '~/__helpers__/testing-library/react-native';
 
 import { ToastUI, ToastUIProps } from '../ToastUI';
 import { DEFAULT_OPTIONS } from '../useToast';
@@ -68,7 +69,7 @@ describe('test ToastUI component', () => {
       })
     ).toThrow(
       new Error(
-        `Toast type: '${type}' does not exist. You can add it via the 'config' prop on the Toast instance. Learn more: https://github.com/calintamas/react-native-toast-message/blob/master/README.md`
+        `Toast type: '${type}' does not exist. You can add it via the 'config' prop on the Toast instance. Learn more: https://github.com/calintamas/react-native-toast-message/blob/HEAD/docs/custom-layouts.md`
       )
     );
   });

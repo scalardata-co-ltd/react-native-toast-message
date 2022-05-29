@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoggerProvider } from './contexts';
+import { EnvironmentProvider, LoggerProvider } from './contexts';
 import { ToastUI } from './ToastUI';
 import {
   ToastHideParams,
@@ -66,7 +66,7 @@ function removeOldRef(oldRef: ToastRef | null) {
   refs = refs.filter((r) => r.current !== oldRef);
 }
 
-export function Toast(props: ToastProps) {
+export function Toast({ useNativeDriver, ...props }: ToastProps) {
   const toastRef = React.useRef<ToastRef | null>(null);
 
   /*
@@ -88,7 +88,9 @@ export function Toast(props: ToastProps) {
 
   return (
     <LoggerProvider enableLogs={false}>
-      <ToastRoot ref={setRef} {...props} />
+      <EnvironmentProvider useNativeDriver={useNativeDriver}>
+        <ToastRoot ref={setRef} {...props} />
+      </EnvironmentProvider>
     </LoggerProvider>
   );
 }

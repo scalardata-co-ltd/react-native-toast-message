@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '~/__helpers__/testing-library/react-hooks';
 
 import { ToastOptions } from '../types';
 import { DEFAULT_DATA, DEFAULT_OPTIONS, useToast } from '../useToast';

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Animated, Platform } from 'react-native';
+import { Animated } from 'react-native';
 
+import { useEnvironmentContext } from '../contexts';
 import { ToastPosition } from '../types';
 import { additiveInverseArray } from '../utils/array';
 import { useKeyboard } from './useKeyboard';
@@ -34,8 +35,6 @@ export function translateYOutputRangeFor({
   return outputRange;
 }
 
-const useNativeDriver = Platform.select({ native: true, default: false });
-
 export function useSlideAnimation({
   position,
   height,
@@ -43,28 +42,37 @@ export function useSlideAnimation({
   bottomOffset,
   keyboardOffset
 }: UseSlideAnimationParams) {
+  const { useNativeDriver } = useEnvironmentContext();
+
   const animatedValue = React.useRef(new Animated.Value(0));
   const { keyboardHeight } = useKeyboard();
 
-  const animate = React.useCallback((toValue: number) => {
-    Animated.spring(animatedValue.current, {
-      toValue,
-      useNativeDriver,
-      friction: 8
-    }).start();
-  }, []);
+  const animate = React.useCallback(
+    (toValue: number) => {
+      Animated.spring(animatedValue.current, {
+        toValue,
+        useNativeDriver: !!useNativeDriver,
+        friction: 8
+      }).start();
+    },
+    [useNativeDriver]
+  );
 
-  const translateY = React.useMemo(() => animatedValue.current.interpolate({
-    inputRange: [0, 1],
-    outputRange: translateYOutputRangeFor({
-      position,
-      height,
-      topOffset,
-      bottomOffset,
-      keyboardHeight,
-      keyboardOffset
-    })
-  }), [position, height, topOffset, bottomOffset, keyboardHeight, keyboardOffset]);
+  const translateY = React.useMemo(
+    () =>
+      animatedValue.current.interpolate({
+        inputRange: [0, 1],
+        outputRange: translateYOutputRangeFor({
+          position,
+          height,
+          topOffset,
+          bottomOffset,
+          keyboardHeight,
+          keyboardOffset
+        })
+      }),
+    [position, height, topOffset, bottomOffset, keyboardHeight, keyboardOffset]
+  );
 
   const opacity = animatedValue.current.interpolate({
     inputRange: [0, 0.7, 1],

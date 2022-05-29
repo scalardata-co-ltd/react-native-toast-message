@@ -1,13 +1,14 @@
 /* eslint-env jest */
 
-import { renderHook } from '@testing-library/react-hooks';
 import { LayoutChangeEvent } from 'react-native';
 import { act } from 'react-test-renderer';
+
+import { renderHook } from '~/__helpers__/testing-library/react-hooks';
 
 import { useViewDimensions } from '../useViewDimensions';
 import { UseViewDimensionsParams } from '..';
 
-const setup = (offsets: UseViewDimensionsParams) => {
+const setup = (offsets?: UseViewDimensionsParams) => {
   const layoutChangeEventMock = {
     nativeEvent: {
       layout: {

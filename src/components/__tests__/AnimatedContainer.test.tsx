@@ -1,6 +1,5 @@
 /* eslint-env jest */
 
-import { render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 import {
   Dimensions,
@@ -8,6 +7,8 @@ import {
   View,
   ViewStyle
 } from 'react-native';
+
+import { render, waitFor } from '~/__helpers__/testing-library/react-native';
 
 import {
   mockGestureValues,

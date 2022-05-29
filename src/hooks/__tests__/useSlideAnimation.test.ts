@@ -1,7 +1,8 @@
 /* eslint-env jest */
 
-import { renderHook } from '@testing-library/react-hooks';
 import { Animated } from 'react-native';
+
+import { renderHook } from '~/__helpers__/testing-library/react-hooks';
 
 import {
   translateYOutputRangeFor,

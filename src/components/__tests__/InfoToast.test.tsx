@@ -1,7 +1,8 @@
 /* eslint-env jest */
 
-import { render } from '@testing-library/react-native';
 import React from 'react';
+
+import { render } from '~/__helpers__/testing-library/react-native';
 
 import { BaseToastProps } from '../../types';
 import { InfoToast } from '../InfoToast';

@@ -46,7 +46,7 @@ function renderComponent({
 
   if (!ToastComponent) {
     throw new Error(
-      `Toast type: '${type}' does not exist. You can add it via the 'config' prop on the Toast instance. Learn more: https://github.com/calintamas/react-native-toast-message/blob/master/README.md`
+      `Toast type: '${type}' does not exist. You can add it via the 'config' prop on the Toast instance. Learn more: https://github.com/calintamas/react-native-toast-message/blob/HEAD/docs/custom-layouts.md`
     );
   }
 

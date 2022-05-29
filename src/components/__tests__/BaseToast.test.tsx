@@ -2,10 +2,11 @@
 
 import '@testing-library/jest-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { Image } from 'react-native';
 import { ReactTestInstance } from 'react-test-renderer';
+
+import { fireEvent, render } from '~/__helpers__/testing-library/react-native';
 
 import { BaseToastProps } from '../../types';
 import { BaseToast } from '../BaseToast';

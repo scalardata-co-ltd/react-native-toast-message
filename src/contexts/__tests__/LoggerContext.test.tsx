@@ -1,11 +1,15 @@
 /* eslint-env jest */
 
-import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
+import { renderHook } from '~/__helpers__/testing-library/react-hooks';
+
 import { ReactChildren } from '../../types';
-import { LoggerProvider, useLogger } from '../LoggerContext';
-import { LoggerProviderProps } from '..';
+import {
+  LoggerProvider,
+  LoggerProviderProps,
+  useLogger
+} from '../LoggerContext';
 
 const setup = (props?: Omit<LoggerProviderProps, 'children'>) => {
   const wrapper = ({ children }: { children: ReactChildren }) => (

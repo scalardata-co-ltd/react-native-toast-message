@@ -1,8 +1,14 @@
 /* eslint-env jest */
 
-import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
-import { Button, Modal, Text } from 'react-native';
+import { Button, Modal, ModalProps, Text } from 'react-native';
+
+import {
+  act,
+  fireEvent,
+  render,
+  waitFor
+} from '~/__helpers__/testing-library/react-native';
 
 import { Toast } from '../Toast';
 
@@ -14,7 +20,7 @@ import { Toast } from '../Toast';
  */
 jest.mock('react-native/Libraries/Modal/Modal', () => {
   const ActualModal = jest.requireActual('react-native/Libraries/Modal/Modal');
-  return (props) => <ActualModal {...props} />;
+  return (props: ModalProps) => <ActualModal {...props} />;
 });
 
 jest.mock('react-native/Libraries/LogBox/LogBox');
@@ -82,7 +88,7 @@ describe('test Toast component', () => {
     expect(onHide).toHaveBeenCalled();
 
     // Show the Modal
-    const showModalButton = utils.queryByText('Show modal');
+    const showModalButton = utils.getByText('Show modal');
     expect(showModalButton).toBeTruthy();
     fireEvent.press(showModalButton);
     await waitFor(() => {
@@ -102,7 +108,7 @@ describe('test Toast component', () => {
     expect(onHideInsideModal).toHaveBeenCalled();
 
     // Hide modal
-    const hideModalButton = utils.queryByText('Hide modal');
+    const hideModalButton = utils.getByText('Hide modal');
     expect(hideModalButton).toBeTruthy();
     fireEvent.press(hideModalButton);
     await waitFor(() => {

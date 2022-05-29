@@ -1,7 +1,8 @@
 /* eslint-env jest */
 
-import { renderHook } from '@testing-library/react-hooks';
 import { Animated, GestureResponderEvent } from 'react-native';
+
+import { renderHook } from '~/__helpers__/testing-library/react-hooks';
 
 import { mockGestureValues } from '../../__helpers__/PanResponder';
 import { usePanResponder } from '../usePanResponder';

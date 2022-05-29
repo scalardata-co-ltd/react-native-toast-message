@@ -173,6 +173,15 @@ export type ToastProps = {
    */
   keyboardOffset?: number;
   /**
+   * Enable / disable native driver for the slide animation.
+   *
+   * Default:
+   *  - `true` on iOS
+   *  - `false` on Android (fixes [issue #300](https://github.com/calintamas/react-native-toast-message/issues/300))
+   *  - `false` on Web (fixes [issue #311](https://github.com/calintamas/react-native-toast-message/issues/311))
+   */
+  useNativeDriver?: boolean;
+  /**
    * Called when any Toast is shown
    */
   onShow?: () => void;

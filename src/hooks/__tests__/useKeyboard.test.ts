@@ -1,7 +1,8 @@
 /* eslint-env jest */
 
-import { act, renderHook } from '@testing-library/react-hooks';
-import { Keyboard } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
+
+import { act, renderHook } from '~/__helpers__/testing-library/react-hooks';
 
 import { isIOS } from '../../utils/platform';
 import { useKeyboard } from '../useKeyboard';
@@ -30,7 +31,7 @@ describe('test useKeyboard hook', () => {
     expect(result.current.isKeyboardVisible).toBe(false);
     expect(result.current.keyboardHeight).toBe(0);
     act(() => {
-      Keyboard.emit('keyboardDidShow', {
+      DeviceEventEmitter.emit('keyboardDidShow', {
         endCoordinates: {
           height: 425
         }
@@ -45,7 +46,7 @@ describe('test useKeyboard hook', () => {
     expect(result.current.isKeyboardVisible).toBe(false);
     expect(result.current.keyboardHeight).toBe(0);
     act(() => {
-      Keyboard.emit('keyboardDidShow', {
+      DeviceEventEmitter.emit('keyboardDidShow', {
         endCoordinates: {
           height: 425
         }
@@ -54,7 +55,7 @@ describe('test useKeyboard hook', () => {
     expect(result.current.isKeyboardVisible).toBe(true);
     expect(result.current.keyboardHeight).toBe(425);
     act(() => {
-      Keyboard.emit('keyboardDidHide');
+      DeviceEventEmitter.emit('keyboardDidHide');
     });
     expect(result.current.isKeyboardVisible).toBe(false);
     expect(result.current.keyboardHeight).toBe(0);
