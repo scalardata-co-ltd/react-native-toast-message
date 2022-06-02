@@ -3,15 +3,22 @@ import { Animated } from 'react-native';
 
 import { useEnvironmentContext } from '../contexts';
 import { ToastPosition } from '../types';
-import { additiveInverseArray } from '../utils/array';
 import { useKeyboard } from './useKeyboard';
 
-type UseSlideAnimationParams = {
+export type UseSlideAnimationParams = {
   position: ToastPosition;
   height: number;
   topOffset: number;
   bottomOffset: number;
   keyboardOffset: number;
+};
+
+const startPointFor = (position: ToastPosition, height: number): number => {
+  const value = height * 2;
+  if (position === 'top') {
+    return -value;
+  }
+  return value;
 };
 
 export function translateYOutputRangeFor({
@@ -24,15 +31,24 @@ export function translateYOutputRangeFor({
 }: UseSlideAnimationParams & {
   keyboardHeight: number;
 }) {
-  const offset = position === 'bottom' ? bottomOffset : topOffset;
-  const keyboardAwareOffset =
-    position === 'bottom' ? keyboardHeight + keyboardOffset : 0;
+  const startPoint = startPointFor(position, height);
 
-  const range = [-(height * 2), Math.max(offset, keyboardAwareOffset)];
-  const outputRange =
-    position === 'bottom' ? additiveInverseArray(range) : range;
+  switch (position) {
+    case 'bottom': {
+      const keyboardAwareOffset = keyboardHeight + keyboardOffset;
+      const range = [startPoint, -Math.max(bottomOffset, keyboardAwareOffset)];
+      return range;
+    }
 
-  return outputRange;
+    case 'top': {
+      const keyboardAwareOffset = 0;
+      const range = [startPoint, Math.max(topOffset, keyboardAwareOffset)];
+      return range;
+    }
+
+    default:
+      throw new Error(`Position '${position}' not supported`);
+  }
 }
 
 export function useSlideAnimation({
@@ -79,9 +95,18 @@ export function useSlideAnimation({
     outputRange: [0, 1, 1]
   });
 
+  const defaultStyles = {
+    transform: [
+      {
+        translateY: startPointFor(position, height)
+      }
+    ]
+  };
+
   return {
     animatedValue,
     animate,
+    defaultStyles,
     animationStyles: {
       opacity,
       transform: [

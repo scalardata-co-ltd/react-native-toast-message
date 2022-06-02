@@ -52,20 +52,20 @@ If an `onHide` callback was set (via `show()`, or as a default `prop` on the Toa
 
 The following set of `props` can be passed to the `Toast` component instance to specify certain **defaults for all Toasts that are shown**:
 
-| prop              | description                                                                                                                       | type                                   | default value                             |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ----------------------------------------- |
-| `config`          | Layout configuration for custom Toast types                                                                                       | [`ToastConfig`](../src/types/index.ts) |                                           |
-| `type`            | Default Toast type                                                                                                                | `string`                               | `success`                                 |
-| `position`        | Default Toast position                                                                                                            | `top` or `bottom`                      | `top`                                     |
-| `visibilityTime`  | Number of milliseconds after which Toast automatically hides. Has effect only in conjunction with `autoHide` prop set to `true`   | `number`                               | `4000`                                    |
-| `autoHide`        | When `true`, the visible Toast automatically hides after a certain number of milliseconds, specified by the `visibilityTime` prop | `boolean`                              | `true`                                    |
-| `topOffset`       | Offset from the top of the screen (in px). Has effect only when `position` is `top`                                               | `number`                               | `40`                                      |
-| `bottomOffset`    | Offset from the bottom of the screen (in px). Has effect only when `position` is `bottom`                                         | `number`                               | `40`                                      |
-| `keyboardOffset`  | Offset from the Keyboard (in px). Has effect only when `position` is `bottom` and Keyboard is visible (iOS only)                  | `number`                               | `10`                                      |
-| `useNativeDriver` | Enable / disable native driver for the slide animation.                                                                           | `boolean`                              | `true` on iOS, `false` on Android and Web |
-| `onShow`          | Called when any Toast is shown                                                                                                    | `() => void`                           |                                           |
-| `onHide`          | Called when any Toast hides                                                                                                       | `() => void`                           |                                           |
-| `onPress`         | Called on any Toast press                                                                                                         | `() => void`                           |                                           |
+| prop              | description                                                                                                                       | type                                   | default value                    |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | -------------------------------- |
+| `config`          | Layout configuration for custom Toast types                                                                                       | [`ToastConfig`](../src/types/index.ts) |                                  |
+| `type`            | Default Toast type                                                                                                                | `string`                               | `success`                        |
+| `position`        | Default Toast position                                                                                                            | `top` or `bottom`                      | `top`                            |
+| `visibilityTime`  | Number of milliseconds after which Toast automatically hides. Has effect only in conjunction with `autoHide` prop set to `true`   | `number`                               | `4000`                           |
+| `autoHide`        | When `true`, the visible Toast automatically hides after a certain number of milliseconds, specified by the `visibilityTime` prop | `boolean`                              | `true`                           |
+| `topOffset`       | Offset from the top of the screen (in px). Has effect only when `position` is `top`                                               | `number`                               | `40`                             |
+| `bottomOffset`    | Offset from the bottom of the screen (in px). Has effect only when `position` is `bottom`                                         | `number`                               | `40`                             |
+| `keyboardOffset`  | Offset from the Keyboard (in px). Has effect only when `position` is `bottom` and Keyboard is visible (iOS only)                  | `number`                               | `10`                             |
+| `useNativeDriver` | Enable / disable native driver for the slide animation.                                                                           | `boolean`                              | `true` on Native, `false` on Web |
+| `onShow`          | Called when any Toast is shown                                                                                                    | `() => void`                           |                                  |
+| `onHide`          | Called when any Toast hides                                                                                                       | `() => void`                           |                                  |
+| `onPress`         | Called on any Toast press                                                                                                         | `() => void`                           |                                  |
 
 For example, to make sure all your Toasts are displayed at the bottom of the screen:
 

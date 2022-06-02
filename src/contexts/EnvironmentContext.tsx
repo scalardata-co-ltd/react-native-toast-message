@@ -14,8 +14,7 @@ const EnvironmentContext = React.createContext<EnvironmentContextType | null>(
 const EnvironmentProvider: React.FC<EnvironmentContextType> = ({
   children,
   useNativeDriver = Platform.select({
-    ios: true,
-    android: false,
+    default: true,
     web: false
   })
 }) => {

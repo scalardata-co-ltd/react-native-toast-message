@@ -3,8 +3,10 @@
 import { Animated } from 'react-native';
 
 import { renderHook } from '~/__helpers__/testing-library/react-hooks';
+import { ToastPosition } from '~/types';
 
 import {
+  UseSlideAnimationParams,
   translateYOutputRangeFor,
   useSlideAnimation
 } from '../useSlideAnimation';
@@ -15,12 +17,13 @@ const defaultOffsets = {
   keyboardOffset: 5
 };
 
-const setup = () => {
+const setup = (props?: Partial<UseSlideAnimationParams>) => {
   const utils = renderHook(() =>
     useSlideAnimation({
       position: 'top',
       height: 20,
-      ...defaultOffsets
+      ...defaultOffsets,
+      ...props
     })
   );
   return {
@@ -48,6 +51,23 @@ describe('test useSlideAnimation hook', () => {
     const { result } = setup();
     result.current.animate(1);
     expect(spy).toHaveBeenCalled();
+  });
+
+  it.each<[ToastPosition, number]>([
+    ['top', -40],
+    ['bottom', 40]
+  ])('returns default styles for position: %s', (position, translateY) => {
+    const { result } = setup({
+      position
+    });
+
+    expect(result.current.defaultStyles).toEqual({
+      transform: [
+        {
+          translateY
+        }
+      ]
+    });
   });
 });
 
@@ -83,5 +103,15 @@ describe('test translateYOutputRangeFor function', () => {
         ...defaultOffsets
       })
     ).toEqual([40, -405]);
+  });
+
+  it('throws if position is not supported', () => {
+    expect(() =>
+      translateYOutputRangeFor({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        position: 'left'
+      })
+    ).toThrow(new Error(`Position 'left' not supported`));
   });
 });

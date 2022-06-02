@@ -1,5 +1,10 @@
 import React from 'react';
-import { Animated, Dimensions, PanResponderGestureState } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  PanResponderGestureState,
+  ViewStyle
+} from 'react-native';
 
 import { useLogger } from '../contexts';
 import {
@@ -80,13 +85,14 @@ export function AnimatedContainer({
 
   const { computeViewDimensions, height } = useViewDimensions();
 
-  const { animatedValue, animate, animationStyles } = useSlideAnimation({
-    position,
-    height,
-    topOffset,
-    bottomOffset,
-    keyboardOffset
-  });
+  const { animatedValue, animate, defaultStyles, animationStyles } =
+    useSlideAnimation({
+      position,
+      height,
+      topOffset,
+      bottomOffset,
+      keyboardOffset
+    });
 
   const onDismiss = React.useCallback(() => {
     log('Swipe, dismissing');
@@ -124,7 +130,7 @@ export function AnimatedContainer({
     <Animated.View
       testID={getTestId('AnimatedContainer')}
       onLayout={computeViewDimensions}
-      style={[styles.base, styles[position], animationStyles]}
+      style={[styles.base, styles[position], defaultStyles, animationStyles]}
       // This container View is never the target of touch events but its subviews can be.
       // By doing this, tapping buttons behind the Toast is allowed
       pointerEvents='box-none'
